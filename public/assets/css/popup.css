@@ -1,0 +1,59 @@
+/* FLS */
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #fdd31f;
+  font-size: large;
+  padding: 10px 1px;
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 2px 2px 20px black;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  border-radius: 30px;
+  width: 150px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  z-index: 9;
+  box-shadow: 2px 2px 20px black;
+  color: white;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 0px 10px 0px 10px;
+  background-color: #ef4c52;
+  text-align: center;
+}
+
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}

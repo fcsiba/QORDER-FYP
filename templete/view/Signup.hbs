@@ -1,0 +1,392 @@
+<!--Qorder Dashboard - v1.0.0-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    SIGNUP||QORDER
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href=" /assets/css/dashboard.css?v=2.1.1" rel="stylesheet" />
+</head>
+
+<body class="bg">
+  <div class="wrapper">
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 pt-4" style="text-align: center;">
+            <h1>
+              QORDER PANEL
+            </h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md-3 "></div>
+          <div class="col-md-6 ">
+            <div class="card " style="background-color:#fdd31f;">
+              <div class="card-header card-header-danger" style="text-align: center;">
+                <h4 class="card-title">Sign up</h4>
+                <p class="card-category">Only for Admin</p>
+              </div>
+              <div class="col-md-12 pt-3" style="visibility:hidden;">
+                <div class="alert alert-danger" id="alert" role="alert" style="visibility:hidden;">
+                  <p id="errorempty" style="display: none;">Fields are empty</p>
+                  <p id="errorname" style="display: none;">Name Field are empty</p>
+                  <p id="erroegender" style="display: none;">Gender is not Selected</p>
+                  <p id="errorrole" style="display: none;">Role is not specified</p>
+                  <p id="erroremail" style="display: none;">Email is empty or improper</p>
+                  <p id="errorpassword" style="display: none;">Password are not same</p>
+                </div>
+                <div class="alert alert-success" id="alertt" style="visibility:hidden;">
+                  <p id="success" style="display: none;">User is added</p>
+                </div>
+              </div>
+
+              <div class="card-body ">
+                <div class="card card-profile">
+                  <div class="card-body pt-5">
+                    <div class="card-avatar">
+                      <a>
+                        <img class="img" src="/assets/img/faces/marc.png" />
+                      </a>
+                    </div>
+                    <form method="POST" action="/Admin/Signup">
+                      <div class="row pt-4">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">First Name</label>
+                            <input type="text" class="form-control" id="fname" name="FirstName">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">Last Name</label>
+                            <input type="text" class="form-control" id="lname" name="LastName">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">Date of birth </label>
+                            <input type="date" class="form-control" name="Birthday">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <select class="form-control bmd-label-static" id="gender" name="Gender">
+                              <option value="other">Gender</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <select class="form-control bmd-label-static" id="roll" name="Role">
+                              <option value="other">Role</option>
+                              <option value="admin">Admin</option>
+                              <option value="Chef">Chef</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">Email </label>
+                            <input type="email" id="email" required class="form-control" name="Email">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">Password </label>
+                            <input type="password" class="form-control" id="txtPassword" name="Password">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-static">Confirm Password </label>
+                            <input type="password" class="form-control" id="txtConfirmPassword">
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-danger pull-right" onclick="return Validate()">Enter</button>
+                    </form>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!--   Core JS Files   -->
+  <script type="text/javascript">
+    function Validate() {
+      var password = document.getElementById("txtPassword").value;
+      var confirmPassword = document.getElementById("txtConfirmPassword").value;
+      var firstName = document.getElementById("fname").value;
+      var lastName = document.getElementById("lname").value;
+      var gender = document.getElementById("gender").value;
+      var roll = document.getElementById("roll").value;
+      var email = document.getElementById("email").value;
+      var alert = document.getElementById("alert");
+      var alertt = document.getElementById("alertt");
+
+      if (firstName == "" || lastName == "") {
+        alert.style.visibility = "visible";
+        alert.style.display = "block";
+        errorempty.style.display = "inline";
+
+      }
+      if (gender == "other") {
+        alert.style.visibility = "visible";
+        alert.style.display = "block";
+        errorgender.style.display = "inline";
+      }
+      if (roll == "other") {
+        alert.style.visibility = "visible";
+        alert.style.display = "block";
+        errorrole.style.display = "inline";
+      }
+      if (email == "") {
+        alert.style.visibility = "visible";
+        alert.style.display = "block";
+        errorrole.style.display = "inline";
+      }
+      if (password != confirmPassword || password == "" || confirmPassword == "") {
+        alert.style.visibility = "visible";
+        alert.style.display = "block";
+        errorpassword.style.display = "inline";
+        return false;
+      }
+      alertt.style.visibility = "visible";
+      alertt.style.display = "block";
+      success.style.display = "inline";
+      return true;
+    }
+  </script>
+
+  <script src=" /assets/js/core/jquery.min.js"></script>
+  <script src=" /assets/js/core/popper.min.js"></script>
+  <script src=" /assets/js/core/bootstrap-design.min.js"></script>
+  <script src=" /assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src=" /assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src=" /assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src=" /assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <script src=" /assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <script src=" /assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src=" /assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src=" /assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <script src=" /assets/js/plugins/jquery-jvectormap.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src=" /assets/js/plugins/nouislider.min.js"></script>
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+  <!-- Library for adding dinamically elements -->
+  <script src=" /assets/js/plugins/arrive.min.js"></script>
+  <!-- Chartist JS -->
+  <script src=" /assets/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src=" /assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src=" /assets/js/dashboard.js?v=2.1.1" type="text/javascript"></script>
+  <script>
+    $(document).ready(function () {
+      $().ready(function () {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+            $('.fixed-plugin .dropdown').addClass('open');
+          }
+
+        }
+
+        $('.fixed-plugin a').click(function (event) {
+          if (event.stopPropagation) {
+            event.stopPropagation();
+          } else if (window.event) {
+            window.event.cancelBubble = true;
+          }
+
+        });
+
+        $('.fixed-plugin .active-color span').click(function () {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function () {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function () {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function () {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function () {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function () {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function () {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function () {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          var simulateWindowResize = setInterval(function () {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          setTimeout(function () {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      // Javascript method's body can be found in /assets/js/demos.js
+      md.initDashboardPageCharts();
+
+    });
+  </script>
+</body>
+
+</html>
